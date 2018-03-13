@@ -16,7 +16,17 @@ def idcard_generator():
     # birthday = '%s-%s-%s 00:00:00' % (IDCard[6:14][0:4], IDCard[6:14][4: 6], IDCard[6:14][6:8])
     return IDCard
 
-
+def generator_times(time_num=10):
+    """默认生成10个身份证号码"""
+    time_num = int(input("请问这位兄贵，您想生成几个号码？\n \n>>>"))
+    id_num = 0
+    list_num = []
+    str = ","
+    for i in range(time_num):
+        id_num = idcard_generator()
+        list_num.append(id_num)
+    return str.join(list_num)
 if __name__ == '__main__':
     with open('./file.txt', 'w') as f:
-        f.write(idcard_generator())
+        f.write(generator_times())
+
