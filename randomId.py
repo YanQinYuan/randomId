@@ -1,5 +1,25 @@
 import random
 import time
+import xlwt
+
+
+def write_to_xls(data, time_num):
+    """把结果写入xls文件"""
+    # 创建 xls 文件对象
+    wb = xlwt.Workbook()
+    # 新增一个表单
+    sh = wb.add_sheet('A Test Sheet', cell_overwrite_ok=True)
+    # 方法一：按位置添加数据,用 zip 打包，同时遍历两个 list
+    for i, j in zip(range(time_num), data):
+        sh.write(i, 0, j)
+
+    # 方法二：把 data 变成一个迭代器
+    # data_g = (x for x in data) 
+    # for i in range(time_num):
+    #     sh.write(i, 0, next(data_g))
+
+    # 保存文件
+    wb.save('example.xls')
 
 
 def idcard_generator():
@@ -18,15 +38,24 @@ def idcard_generator():
 
 def generator_times(time_num=10):
     """默认生成10个身份证号码"""
-    time_num = int(input("请问这位兄贵，您想生成几个号码？\n \n>>>"))
+    user_input = input("\n 请问这位兄贵，您想生成几个号码？\n \n>>>")
+    time_num = int(user_input)
     id_num = 0
     list_num = []
     str = ","
     for i in range(time_num):
         id_num = idcard_generator()
         list_num.append(id_num)
-    return str.join(list_num)
-if __name__ == '__main__':
-    with open('./file.txt', 'w') as f:
-        f.write(generator_times())
+    return list_num, time_num
 
+# 保存到 txt 文件
+# if __name__ == '__main__':
+#     with open('./file.txt', 'w') as f:
+#         f.write(generator_times())
+
+
+# 保存到 xls 文件
+if __name__ == '__main__':
+    list_num, time_num = generator_times()
+    print("\n 生成成功，请查看 example.xls 文件夹。")
+    write_to_xls(list_num, time_num)
