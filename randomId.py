@@ -19,6 +19,7 @@ def write_to_xls(data, time_num):
     #     sh.write(i, 0, next(data_g))
 
     # 保存文件
+	
     wb.save('example.xls')
 
 
@@ -39,7 +40,7 @@ def idcard_generator():
 def generator_times(time_num=10):
     """默认生成10个身份证号码"""
     user_input = input("\n 请问这位兄贵，您想生成几个号码？\n \n>>>")
-    time_num = int(user_input)
+    time_num = int(user_input) #号码数 
     id_num = 0
     list_num = []
     str = ","
@@ -49,9 +50,11 @@ def generator_times(time_num=10):
     return list_num, time_num
 
 # 保存到 txt 文件
-# if __name__ == '__main__':
-#     with open('./file.txt', 'w') as f:
-#         f.write(generator_times())
+def write_to_txt(data, time_num):
+    data, time_num = generator_times()
+    with open('./file.txt', 'w') as f:
+
+        f.write(generator_times())
 
 
 # 保存到 xls 文件
